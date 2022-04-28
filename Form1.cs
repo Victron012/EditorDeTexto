@@ -14,6 +14,7 @@ namespace Aula83
     public partial class Form1 : Form
     {
         StringReader leitura = null;
+        bool salvoComSucesso = false;
 
         public Form1()
         {
@@ -41,8 +42,11 @@ namespace Aula83
                 else if (ret == 'S')
                 {
                     Salvar();
-                    richTextBox1.Clear();
-                    richTextBox1.Focus();
+                    if (salvoComSucesso == true)
+                    {
+                        richTextBox1.Clear();
+                        richTextBox1.Focus();
+                    }
                 }
                 else
                 {
@@ -65,6 +69,11 @@ namespace Aula83
                     streamWriter.Write(richTextBox1.Text);
                     streamWriter.Flush();
                     streamWriter.Close();
+                    salvoComSucesso = true;
+                }
+                else
+                {
+                    salvoComSucesso = false;
                 }
             }
             catch (Exception e)
@@ -75,29 +84,42 @@ namespace Aula83
 
         private void Abrir()
         {
-            try
+            salvoComSucesso = true;
+            if (richTextBox1.Text != "")
             {
-                this.openFileDialog1.Title = "Abrir arquivo";
-                openFileDialog1.InitialDirectory = @"C:\Users\victr\Documents\";
-                openFileDialog1.Filter = "*.txt|*.txt";
-                if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+                char ret = DesejaSalvar();
+                if (ret == 'S')
                 {
-                    FileStream arquivo = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
-                    StreamReader streamReader = new StreamReader(arquivo);
-                    streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
-                    this.richTextBox1.Clear();
-                    string linha = streamReader.ReadLine();
-                    while (linha != null)
-                    {
-                        this.richTextBox1.Text += linha + "\n";
-                        linha = streamReader.ReadLine();
-                    }
-                    streamReader.Close();
+                    Salvar();
                 }
+
             }
-            catch (Exception e)
+            if (salvoComSucesso == true)
             {
-                MessageBox.Show("Erro ao abrir arquivo: " + e.Message, "Erro ao abrir", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                try
+                {
+                    this.openFileDialog1.Title = "Abrir arquivo";
+                    openFileDialog1.InitialDirectory = @"C:\Users\victr\Documents\";
+                    openFileDialog1.Filter = "*.txt|*.txt";
+                    if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        FileStream arquivo = new FileStream(openFileDialog1.FileName, FileMode.Open, FileAccess.Read);
+                        StreamReader streamReader = new StreamReader(arquivo);
+                        streamReader.BaseStream.Seek(0, SeekOrigin.Begin);
+                        this.richTextBox1.Clear();
+                        string linha = streamReader.ReadLine();
+                        while (linha != null)
+                        {
+                            this.richTextBox1.Text += linha + "\n";
+                            linha = streamReader.ReadLine();
+                        }
+                        streamReader.Close();
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Erro ao abrir arquivo: " + e.Message, "Erro ao abrir", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -323,6 +345,10 @@ namespace Aula83
                 if (ret == 'S')
                 {
                     Salvar();
+                    if (salvoComSucesso == false)
+                    {
+                        e.Cancel = true;
+                    }
                 }
                 else if (ret == 'C')
                 {
@@ -440,9 +466,9 @@ namespace Aula83
             SolidBrush pincel = new SolidBrush(Color.Black);
             linhasPag = e.MarginBounds.Height / fonte.GetHeight(e.Graphics);
             linha = leitura.ReadLine();
-            while(cont < linhasPag)
+            while (cont < linhasPag)
             {
-                PosY =(margemSuperior+(cont*fonte.GetHeight(e.Graphics)));
+                PosY = (margemSuperior + (cont * fonte.GetHeight(e.Graphics)));
                 e.Graphics.DrawString(linha, fonte, pincel, margemEsquerda, PosY, new StringFormat());
                 cont++;
                 linha = leitura.ReadLine();

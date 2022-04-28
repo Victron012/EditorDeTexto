@@ -19,3 +19,14 @@ E:\Projetos\CursoC#\Aula83\obj\Debug\Aula83.csproj.CoreCompileInputs.cache
 E:\Projetos\CursoC#\Aula83\obj\Debug\Aula83.exe
 E:\Projetos\CursoC#\Aula83\obj\Debug\Aula83.pdb
 E:\Projetos\CursoC#\Aula83\obj\Debug\Aula83.F_Salvar.resources
+E:\Projetos\EditorDeTexto\bin\Debug\Aula83.exe.config
+E:\Projetos\EditorDeTexto\bin\Debug\Aula83.exe
+E:\Projetos\EditorDeTexto\bin\Debug\Aula83.pdb
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.csproj.AssemblyReference.cache
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.Form1.resources
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.F_Salvar.resources
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.Properties.Resources.resources
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.csproj.GenerateResource.cache
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.csproj.CoreCompileInputs.cache
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.exe
+E:\Projetos\EditorDeTexto\obj\Debug\Aula83.pdb
